@@ -20,6 +20,7 @@
         - php5-gd
         - php5-json
         - php5-mcrypt
+        - pbzip2
 
     - name: Habilita módulos necesarios rewrite, proxy, proxy_http
       shell: "a2enmod rewrite proxy proxy_http"
