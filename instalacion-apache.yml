@@ -42,9 +42,8 @@
         dest: /var/www/rsn.ucr.ac.cr.tar.bz2
 
     - name: Descomprime contenido de Joomla en /var/www/rsn.ucr.ac.cr/
-      command: pbzip2 -d /var/www/rsn.ucr.ac.cr.tar.bz2
-
-
+      command: "pbzip2 -d /var/www/rsn.ucr.ac.cr.bz2"
+    
     - name: Reiniciar el servicio de apache para aplicar los cambios
       service:
         name: apache2
