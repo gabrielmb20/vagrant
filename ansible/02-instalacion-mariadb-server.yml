@@ -34,9 +34,3 @@
       service:
         name: mariadb
         state: restarted
-
-    - name: Descarga respaldo de base de datos
-      get_url:
-        url: http://10.42.30.5/Vagrant/RSN/respaldo-mysql.sql.bz2
-        dest: /home/vagrant/respaldo-mysql.sql.bz2
-

@@ -26,5 +26,22 @@
         state: started
       when: inventory_hostname != groups['bases_datos'][0]
       
+    - name: Descarga respaldo de la base de datos en el primer nodo
+      get_url:
+        url: http://10.42.30.5/Vagrant/RSN/respaldo-mysql.sql.bz2
+        dest: /tmp/respaldo-mysql.sql.bz2
+      when: inventory_hostname == groups['bases_datos'][0]
 
+    - name: Restaurar respaldo de la base de datos
+      mysql_db:
+        name: rsn
+        state: import
+        target: /tmp/respaldo-mysql.sql.bz2
+      when: inventory_hostname == groups['bases_datos'][0]
 
+    - name: Crear usuario para acceder las bases de datos desde los Joomla
+      mysql_user:
+        name: greencore
+        password: greencore
+        priv: "*.*:ALL"
+        state: present

@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
       SHELL
     end
     proxy01.vm.provider :virtualbox do |v|
-      v.customize ["modifyvm", :id, "--cpus", 6]
+      v.customize ["modifyvm", :id, "--cpus", 4]
       v.customize ["modifyvm", :id, "--name", "proxy01"]
     end
   end
@@ -42,7 +42,7 @@ Vagrant.configure("2") do |config|
     end
 
     proxy02.vm.provider :virtualbox do |v|
-      v.customize ["modifyvm", :id, "--cpus", 6]
+      v.customize ["modifyvm", :id, "--cpus", 4]
       v.customize ["modifyvm", :id, "--memory", 1024]
       v.customize ["modifyvm", :id, "--name", "proxy02"]
     end
@@ -66,7 +66,7 @@ Vagrant.configure("2") do |config|
     end
 
     joomla01.vm.provider :virtualbox do |v|
-      v.customize ["modifyvm", :id, "--cpus", 6]
+      v.customize ["modifyvm", :id, "--cpus", 4]
       v.customize ["modifyvm", :id, "--memory", 1024]
       v.customize ["modifyvm", :id, "--name", "joomla01"]
     end
@@ -90,7 +90,7 @@ Vagrant.configure("2") do |config|
     end
 
     joomla02.vm.provider :virtualbox do |v|
-      v.customize ["modifyvm", :id, "--cpus", 6]
+      v.customize ["modifyvm", :id, "--cpus", 4]
       v.customize ["modifyvm", :id, "--memory", 1024]
       v.customize ["modifyvm", :id, "--name", "joomla02"]
     end
@@ -105,7 +105,7 @@ Vagrant.configure("2") do |config|
     mariadb01.vm.network "private_network", ip: "10.20.30.45"
 
     mariadb01.vm.provider :virtualbox do |v|
-      v.customize ["modifyvm", :id, "--cpus", 6]
+      v.customize ["modifyvm", :id, "--cpus", 4]
       v.customize ["modifyvm", :id, "--memory", 1024]
       v.customize ["modifyvm", :id, "--name", "mariadb01"]
     end
@@ -152,7 +152,7 @@ Vagrant.configure("2") do |config|
 
     mariadb02.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--memory", 1024]
-      v.customize ["modifyvm", :id, "--cpus", 6]
+      v.customize ["modifyvm", :id, "--cpus", 4]
       v.customize ["modifyvm", :id, "--name", "mariadb02"]
     end
   end
