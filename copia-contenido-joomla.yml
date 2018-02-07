@@ -12,7 +12,7 @@
         mode: 0644
 
     - name: Habilita virtualhost personalizado
-          shell: "a2ensite 01-rsn.ucr.ac.cr.conf"
+      shell: "a2ensite 01-rsn.ucr.ac.cr.conf"
 
     - name: Descarga copia del contenido de Joomla
       get_url:
