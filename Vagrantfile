@@ -56,7 +56,7 @@ Vagrant.configure("2") do |config|
 # -----------------------------------
   config.vm.define "joomla02" do |joomla02|
     joomla02.vm.box = "ubuntu/trusty64"
-    joomla02.vm.hostname = 'joomla01'
+    joomla02.vm.hostname = 'joomla02'
 
     joomla02.vm.network "private_network", ip: "10.20.30.44"
 
@@ -83,11 +83,11 @@ Vagrant.configure("2") do |config|
 
     mariadb01.vm.provision "shell", inline: "sudo apt-get install -y python"
 
-    mariadb01.vm.provision "ansible" do |ansible|
+#    mariadb01.vm.provision "ansible" do |ansible|
 #      ansible.playbook = "instalacion-mariadb-server.yml"
 #      ansible.inventory_path = "inventory/hosts"
 #      ansible.limit = '10.20.30.45'
-    end
+#    end
 
   end
 # -----------------------------------
@@ -101,11 +101,11 @@ Vagrant.configure("2") do |config|
 
     mariadb02.vm.provision "shell", inline: "sudo apt-get install -y python"
 
-    mariadb02.vm.provision "ansible" do |ansible|
+#    mariadb02.vm.provision "ansible" do |ansible|
 #      ansible.playbook = "instalacion-mariadb-server.yml"
 #      ansible.inventory_path = "inventory/hosts"
 #      ansible.limit = '10.20.30.46'
-    end
+#    end
 
     mariadb02.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--memory", 1024]
