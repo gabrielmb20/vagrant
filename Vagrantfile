@@ -1,46 +1,150 @@
 Vagrant.configure("2") do |config|
+# -----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 
-  config.vm.define "pruebas" do |pruebas|
-    pruebas.vm.box = "ubuntu/xenial64"
-    pruebas.vm.hostname = 'pruebas'
-#    pruebas.vm.box_url = 'http://10.42.30.5/Vagrant/boxes/xenial64/virtualbox.box'
+# -----------------------------------
+# PROXY #1
+# -----------------------------------
+  config.vm.define "proxy01" do |proxy01|
+    proxy01.vm.box = "ubuntu/trusty64"
+    proxy01.vm.hostname = 'proxy01'
 
-    pruebas.vm.network "private_network", ip: "10.20.30.41"
+    proxy01.vm.network "private_network", ip: "10.20.30.41"
 
-    pruebas.vm.provider :virtualbox do |v|
-      v.customize ["modifyvm", :id, "--memory", 2048]
-      v.customize ["modifyvm", :id, "--name", "pruebas"]
+    proxy01.vm.provision "shell", inline: "sudo apt-get install -y python"
+
+    proxy01.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 768]
+      v.customize ["modifyvm", :id, "--name", "proxy01"]
     end
-
-    pruebas.vm.provision "shell", inline: "sudo apt-get install -y python" 
-
-    pruebas.vm.provision "ansible" do |ansible|
-      ansible.playbook = "instalacion-mariadb-server.yml"
-      ansible.inventory_path = "inventory/hosts"
-      ansible.limit = '10.20.30.41'
-    end
-    
   end
 
-  config.vm.define "pruebas2" do |pruebas2|
-    pruebas2.vm.box = "ubuntu/xenial64"
-    pruebas2.vm.hostname = 'pruebas2'
-#    pruebas.vm.box_url = 'http://10.42.30.5/Vagrant/boxes/xenial64/virtualbox.box'
+# -----------------------------------
+# PROXY #2
+# -----------------------------------
+  config.vm.define "proxy02" do |proxy02|
+    proxy02.vm.box = "ubuntu/trusty64"
+    proxy02.vm.hostname = 'proxy02'
 
-    pruebas2.vm.network "private_network", ip: "10.20.30.42"
+    proxy02.vm.network "private_network", ip: "10.20.30.42"
 
-    pruebas2.vm.provider :virtualbox do |v|
-      v.customize ["modifyvm", :id, "--memory", 2048]
-      v.customize ["modifyvm", :id, "--name", "pruebas2"]
+    proxy02.vm.provision "shell", inline: "sudo apt-get install -y python"
+
+    proxy02.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 768]
+      v.customize ["modifyvm", :id, "--name", "proxy02"]
+    end
+  end
+# -----------------------------------
+# JOOMLA #1
+# -----------------------------------
+  config.vm.define "joomla01" do |joomla01|
+    joomla01.vm.box = "ubuntu/trusty64"
+    joomla01.vm.hostname = 'joomla01'
+
+    joomla01.vm.network "private_network", ip: "10.20.30.43"
+
+    joomla01.vm.provision "shell", inline: "sudo apt-get install -y python"
+
+    joomla01.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 768]
+      v.customize ["modifyvm", :id, "--name", "joomla01"]
+    end
+  end
+# -----------------------------------
+# JOOMLA #2
+# -----------------------------------
+  config.vm.define "joomla02" do |joomla02|
+    joomla02.vm.box = "ubuntu/trusty64"
+    joomla02.vm.hostname = 'joomla01'
+
+    joomla02.vm.network "private_network", ip: "10.20.30.44"
+
+    joomla02.vm.provision "shell", inline: "sudo apt-get install -y python"
+
+    joomla02.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 768]
+      v.customize ["modifyvm", :id, "--name", "joomla02"]
+    end
+  end
+# -----------------------------------
+# MARIADB #1
+# -----------------------------------
+  config.vm.define "mariadb01" do |mariadb01|
+    mariadb01.vm.box = "ubuntu/xenial64"
+    mariadb01.vm.hostname = 'mariadb01'
+
+    mariadb01.vm.network "private_network", ip: "10.20.30.45"
+
+    mariadb01.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 768]
+      v.customize ["modifyvm", :id, "--name", "mariadb01"]
     end
 
-    pruebas2.vm.provision "shell", inline: "sudo apt-get install -y python" 
+    mariadb01.vm.provision "shell", inline: "sudo apt-get install -y python"
 
-    pruebas2.vm.provision "ansible" do |ansible|
+    mariadb01.vm.provision "ansible" do |ansible|
       ansible.playbook = "instalacion-mariadb-server.yml"
       ansible.inventory_path = "inventory/hosts"
-      ansible.limit = '10.20.30.42'
+      ansible.limit = '10.20.30.45'
     end
-    
+
   end
+# -----------------------------------
+# MARIADB #2
+# -----------------------------------
+  config.vm.define "mariadb02" do |mariadb02|
+    mariadb02.vm.box = "ubuntu/xenial64"
+    mariadb02.vm.hostname = 'mariadb02'
+
+    mariadb02.vm.network "private_network", ip: "10.20.30.46"
+
+    mariadb02.vm.provision "shell", inline: "sudo apt-get install -y python"
+
+    mariadb02.vm.provision "ansible" do |ansible|
+      ansible.playbook = "instalacion-mariadb-server.yml"
+      ansible.inventory_path = "inventory/hosts"
+      ansible.limit = '10.20.30.46'
+    end
+
+    mariadb02.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 768]
+      v.customize ["modifyvm", :id, "--name", "mariadb02"]
+    end
+  end
+# -----------------------------------
+# APP #1
+# -----------------------------------
+  config.vm.define "app01" do |app01|
+    app01.vm.box = "ubuntu/trusty64"
+    app01.vm.hostname = 'app01'
+
+    app01.vm.network "private_network", ip: "10.20.30.47"
+
+    app01.vm.provision "shell", inline: "sudo apt-get install -y python"
+
+    app01.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 768]
+      v.customize ["modifyvm", :id, "--name", "app01"]
+    end
+  end
+# -----------------------------------
+# APP #2
+# -----------------------------------
+  config.vm.define "app02" do |app02|
+    app02.vm.box = "ubuntu/trusty64"
+    app02.vm.hostname = 'app02'
+
+    app02.vm.network "private_network", ip: "10.20.30.48"
+
+    app02.vm.provision "shell", inline: "sudo apt-get install -y python"
+
+    app02.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 768]
+      v.customize ["modifyvm", :id, "--name", "app02"]
+    end
+  end
+
+# -----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 end

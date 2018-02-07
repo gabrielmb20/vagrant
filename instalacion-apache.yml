@@ -1,33 +1,50 @@
 ---
-- name: Instala servidor de bases de datos MariaDB
-  hosts: bases_datos
+- name: Instala servidor web Apache
+  hosts: joomlas
   become: yes
   tasks:
-    - name: Agregar llave de repositorio de MariaDB
-      apt_key:
-        keyserver: keyserver.ubuntu.com
-        id: "0xF1656F24C74CD1D8"
-
-    - name: Agrega el repositorio
-      apt_repository:
-        repo: deb http://mariadb.mirror.iweb.com/repo/10.2/ubuntu xenial main
-        state: present
-
-    - name: Actualiza caché de APT
+    - name: Instala el paquete apache2 y dependencias necesarias
       apt:
-        update_cache: yes
-
-    - name: Instala el paquete mariadb-server-10.2
-      apt:
-        name: mariadb-server-10.2
+        name: "{{ item }}"
         state: present
+      with_items:
+        - libapache2-mod-php5 
+        - mariadb-common 
+        - mariadb-client 
+        - php5 
+        - php5-mysql 
+        - php-pear 
+        - php5-cli
+        - php5-common
+        - php5-gd
+        - php5-json
+        - php5-mcrypt
 
-    - name: Agregar configuración principal de MariaDB
-      copy:
-        src: files/my.cnf
-        dest: /etc/mysql/my.cnf
+    - name: Habilita módulos necesarios: rewrite, proxy, proxy_http
+      shell: "a2enmod rewrite proxy proxy_http"
         
-    - name: Reiniciar el servicio de mariadb para aplicar los cambios
+    - name: Copia archivo de configuración del virtualhost
+      copy:
+        src: files/01-apache-virtualhost.conf
+        dest: /etc/apache2/sites/available/01-rsn.ucr.ac.cr.conf
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Deshabilita virtualhost default y habilita el nuevo
+      shell: "a2dissite 000-default.conf && a2ensite 01-rsn.ucr.ac.cr.conf"
+
+    - name: Descarga copia del contenido de Joomla
+      get_url:
+        url: http://10.42.30.5/Vagrant/RSN/rsn.ucr.ac.cr.tar.bz2
+        dest: /var/www/rsn.ucr.ac.cr.tar.bz2
+
+    - name: Descomprime contenido de Joomla en /var/www/rsn.ucr.ac.cr/
+      command: pbzip2 -d /var/www/rsn.ucr.ac.cr.tar.bz2
+
+
+    - name: Reiniciar el servicio de apache para aplicar los cambios
       service:
-        name: mariadb
+        name: apache2
         state: restarted
+

@@ -1,13 +1,21 @@
 ---
 - name: Instala Vagrant sobre Ubuntu
   hosts: fisicos
-  become: yes
+  remote_user: greencore
   tasks:
     - name: Instala vagrant 2.0.2_x86_64
       apt:
         deb: "https://releases.hashicorp.com/vagrant/2.0.2/vagrant_2.0.2_x86_64.deb"
+        state: present
       register: deb_install
+      become: yes
     
     - name: Estado de la instalación del agente
       debug:
         var: deb_install
+
+    - name: Descarga box de Ubuntu trusty64 (14.04) 
+      shell: "vagrant box add ubuntu/trusty64 http://10.42.30.5/Vagrant/boxes/trusty64/virtualbox.box"
+
+    - name: Descarga box de Ubuntu xenial64 (16.04)
+      shell: "vagrant box add ubuntu/xenial64 http://10.42.30.5/Vagrant/boxes/xenial64/virtualbox.box"
