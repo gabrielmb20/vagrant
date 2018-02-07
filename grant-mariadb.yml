@@ -1,0 +1,7 @@
+---
+- name: Configura acceso a la base de datos
+  hosts: bases_datos
+  become: no
+  tasks:
+    - name: Grant para permitir acceso del usuario haproxy_root
+      shell: "mysql -u root -e grant all on *.* to 'haproxy_root'@'%' identified by 'greencore'"
