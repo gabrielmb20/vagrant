@@ -1,3 +1,4 @@
 Respaldo bd en ambos servidores, solo 1
 copiar config de ssh
-
+cambiar nombres de archivos
+estructura por lecciones

@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
 # PROXY #1
 # -----------------------------------
   config.vm.define "proxy01" do |proxy01|
-    proxy01.vm.box = "ubuntu/trusty64"
+    proxy01.vm.box = "ubuntu/xenial64"
     proxy01.vm.hostname = 'proxy01'
 
     proxy01.vm.network "private_network", ip: "10.20.30.41"
@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
 # PROXY #2
 # -----------------------------------
   config.vm.define "proxy02" do |proxy02|
-    proxy02.vm.box = "ubuntu/trusty64"
+    proxy02.vm.box = "ubuntu/xenial64"
     proxy02.vm.hostname = 'proxy02'
 
     proxy02.vm.network "private_network", ip: "10.20.30.42"
