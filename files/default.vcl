@@ -75,10 +75,10 @@ sub vcl_recv {
                 set req.backend_hint = rsn_joomla_director.backend();
 
         }
-        elsif (req.http.host ~ "(?i)^(rsnapiusr.)?ucr.ac.cr") {
-                set req.http.host = "rsnapiusr.ucr.ac.cr";
-                set req.backend_hint = rsn_app_director.backend();
-        }
+#        elsif (req.http.host ~ "(?i)^(rsnapiusr.)?ucr.ac.cr") {
+#                set req.http.host = "rsnapiusr.ucr.ac.cr";
+#                set req.backend_hint = rsn_app_director.backend();
+#        }
 
 # -------------------------------------------------------------------------------------------------------------------------
 
