@@ -1,0 +1,40 @@
+127.0.0.1   localhost localhost.localdomain 
+::1         localhost localhost.localdomain
+ 
+# MÁQUINAS FÍSICAS
+# # -----------------------------------------------------------------------
+163.178.105.68	rsn-virtual-01.rsn.ucr.ac.cr		rsn-virtual-01
+163.178.105.86  rsn-virtual-02.rsn.ucr.ac.cr    	rsn-virtual-02
+
+# # MÁQUINAS VIRTUALES
+# # -----------------------------------------------------------------------
+# # Centro de Informática (máquinas virtuales sobre VMware)
+# # -----------------------------------------------------------------------
+172.16.48.17    rsn-ucr-proxy.ucr.ac.cr    	  	rsn-ucr-proxy
+172.16.48.18    rsn-ucr-joomla.ucr.ac.cr    	  	rsn-ucr-joomla
+172.16.48.19    rsn-ucr-mariadb.ucr.ac.cr    	  	rsn-ucr-mariadb
+172.16.48.21    rsn-ucr-app.ucr.ac.cr 		  	rsn-ucr-app
+
+# # Geologia #1   (PowerEdge R930)
+# # -----------------------------------------------------------------------
+10.178.105.67   rsn-geo01-proxy.rsn.ucr.ac.cr     	rsn-geo01-proxy
+10.178.105.68   rsn-geo01-joomla.rsn.ucr.ac.cr    	rsn-geo01-joomla
+10.178.105.69   rsn-geo01-mariadb.rsn.ucr.ac.cr   	rsn-geo01-mariadb
+10.178.105.70   rsn-geo01-respaldos.rsn.ucr.ac.cr     	rsn-geo01-respaldos
+10.178.105.71   rsn-geo01-app.rsn.ucr.ac.cr       	rsn-geo01-app
+10.178.105.72   rsn-geo01-monitoreo.rsn.ucr.ac.cr      	rsn-geo01-monitoreo
+# Desarrollo API
+10.178.105.82   rsn-geo01-api-database.rsn.ucr.ac.cr	rsn-geo01-api-database
+10.178.105.83   rsn-geo01-api-desarrollo.rsn.ucr.ac.cr	rsn-geo01-api-desarrollo
+10.178.105.84   rsn-geo01-api-produccion.rsn.ucr.ac.cr	rsn-geo01-api-produccion
+
+
+# # Geologia #2   (ProLiant ML350 G6)
+# # -----------------------------------------------------------------------
+10.178.105.77   rsn-geo02-proxy.rsn.ucr.ac.cr     	rsn-geo02-proxy
+10.178.105.78   rsn-geo02-joomla.rsn.ucr.ac.cr    	rsn-geo02-joomla
+10.178.105.79   rsn-geo02-mariadb.rsn.ucr.ac.cr   	rsn-geo02-mariadb
+10.178.105.80   rsn-geo02-respaldos.rsn.ucr.ac.cr     	rsn-geo02-respaldos
+10.178.105.81   rsn-geo02-app.rsn.ucr.ac.cr	  	rsn-geo02-app 
+
+10.178.105.73	rsn-apache-01.rsn.ucr.ac.cr	  	rsn-apache-01
