@@ -7,14 +7,18 @@ Vagrant.configure("2") do |config|
   config.vm.define "proxy01" do |proxy01|
     proxy01.vm.box = "ubuntu/xenial64"
     proxy01.vm.hostname = 'proxy01'
-
     proxy01.vm.network "private_network", ip: "10.20.30.41"
 
     proxy01.vm.provision "shell", inline: "sudo apt-get install -y python"
-    proxy01.vm.provision "file", source: "~greencore/.ssh/id_rsa.pub", destination: "~vagrant/.ssh/authorized_keys"
-
+    config.vm.provision "shell" do |s|
+      ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+      s.inline = <<-SHELL
+        echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+        echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
+      SHELL
+    end
     proxy01.vm.provider :virtualbox do |v|
-      v.customize ["modifyvm", :id, "--memory", 1024]
+      v.customize ["modifyvm", :id, "--cpus", 6]
       v.customize ["modifyvm", :id, "--name", "proxy01"]
     end
   end
@@ -29,9 +33,16 @@ Vagrant.configure("2") do |config|
     proxy02.vm.network "private_network", ip: "10.20.30.42"
 
     proxy02.vm.provision "shell", inline: "sudo apt-get install -y python"
-    proxy02.vm.provision "file", source: "~greencore/.ssh/id_rsa.pub", destination: "~vagrant/.ssh/authorized_keys"
+    config.vm.provision "shell" do |s|
+      ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+      s.inline = <<-SHELL
+        echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+        echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
+      SHELL
+    end
 
     proxy02.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--cpus", 6]
       v.customize ["modifyvm", :id, "--memory", 1024]
       v.customize ["modifyvm", :id, "--name", "proxy02"]
     end
@@ -46,9 +57,16 @@ Vagrant.configure("2") do |config|
     joomla01.vm.network "private_network", ip: "10.20.30.43"
 
     joomla01.vm.provision "shell", inline: "sudo apt-get install -y python"
-    joomla01.vm.provision "file", source: "~greencore/.ssh/id_rsa.pub", destination: "~vagrant/.ssh/authorized_keys"
+    config.vm.provision "shell" do |s|
+      ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+      s.inline = <<-SHELL
+        echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+        echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
+      SHELL
+    end
 
     joomla01.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--cpus", 6]
       v.customize ["modifyvm", :id, "--memory", 1024]
       v.customize ["modifyvm", :id, "--name", "joomla01"]
     end
@@ -63,9 +81,16 @@ Vagrant.configure("2") do |config|
     joomla02.vm.network "private_network", ip: "10.20.30.44"
 
     joomla02.vm.provision "shell", inline: "sudo apt-get install -y python"
-    joomla02.vm.provision "file", source: "~greencore/.ssh/id_rsa.pub", destination: "~vagrant/.ssh/authorized_keys"
+    config.vm.provision "shell" do |s|
+      ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+      s.inline = <<-SHELL
+        echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+        echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
+      SHELL
+    end
 
     joomla02.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--cpus", 6]
       v.customize ["modifyvm", :id, "--memory", 1024]
       v.customize ["modifyvm", :id, "--name", "joomla02"]
     end
@@ -80,12 +105,19 @@ Vagrant.configure("2") do |config|
     mariadb01.vm.network "private_network", ip: "10.20.30.45"
 
     mariadb01.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--cpus", 6]
       v.customize ["modifyvm", :id, "--memory", 1024]
       v.customize ["modifyvm", :id, "--name", "mariadb01"]
     end
 
     mariadb01.vm.provision "shell", inline: "sudo apt-get install -y python"
-    mariadb01.vm.provision "file", source: "~greencore/.ssh/id_rsa.pub", destination: "~vagrant/.ssh/authorized_keys"
+    config.vm.provision "shell" do |s|
+      ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+      s.inline = <<-SHELL
+        echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+        echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
+      SHELL
+    end
 
 #    mariadb01.vm.provision "ansible" do |ansible|
 #      ansible.playbook = "instalacion-mariadb-server.yml"
@@ -104,7 +136,13 @@ Vagrant.configure("2") do |config|
     mariadb02.vm.network "private_network", ip: "10.20.30.46"
 
     mariadb02.vm.provision "shell", inline: "sudo apt-get install -y python"
-    mariadb02.vm.provision "file", source: "~greencore/.ssh/id_rsa.pub", destination: "~vagrant/.ssh/authorized_keys"
+    config.vm.provision "shell" do |s|
+      ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+      s.inline = <<-SHELL
+        echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+        echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
+      SHELL
+    end
 
 #    mariadb02.vm.provision "ansible" do |ansible|
 #      ansible.playbook = "instalacion-mariadb-server.yml"
@@ -114,6 +152,7 @@ Vagrant.configure("2") do |config|
 
     mariadb02.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--memory", 1024]
+      v.customize ["modifyvm", :id, "--cpus", 6]
       v.customize ["modifyvm", :id, "--name", "mariadb02"]
     end
   end
