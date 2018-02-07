@@ -16,6 +16,9 @@
         group: root
         mode: 0644
 
+    - name: Systemd Daemon Reload
+      shell: "systemctl daemon-reload"
+
     - name: Copia configuración principal de varnish
       copy:
         src: files/default.vcl
