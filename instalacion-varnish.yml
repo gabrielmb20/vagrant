@@ -1,0 +1,31 @@
+---
+- name: Instala servidor proxy caché Varnish
+  hosts: proxys
+  become: yes
+  tasks:
+    - name: Instala varnish via apt
+      apt:
+        name: varnish
+        state: present
+
+    - name: Configura el servicio para que escuche en el puerto 80
+      copy:
+        src: files/varnish.service
+        dest: /etc/systemd/system/varnish.service
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Copia configuración principal de varnish
+      copy:
+        src: files/default.vcl
+        dest: /etc/varnish/default.vcl
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Reiniciar el servicio de varnish para aplicar los cambios
+      service:
+        name: varnish
+        state: restarted
+
