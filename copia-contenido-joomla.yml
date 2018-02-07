@@ -1,0 +1,28 @@
+---
+- name: Descarga copia del contenido de Joomla
+  hosts: joomlas
+  become: yes
+  tasks:
+    - name: Copia archivo de configuración del virtualhost
+      copy:
+        src: files/01-apache-virtualhost.conf
+        dest: /etc/apache2/sites-available/01-rsn.ucr.ac.cr.conf
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Habilita virtualhost personalizado
+          shell: "a2ensite 01-rsn.ucr.ac.cr.conf"
+
+    - name: Descarga copia del contenido de Joomla
+      get_url:
+        url: http://10.42.30.5/Vagrant/RSN/rsn.ucr.ac.cr.tar.bz2
+        dest: /var/www/rsn.ucr.ac.cr.tar.bz2
+ 
+    - name: Descomprime contenido de Joomla en /var/www/rsn.ucr.ac.cr/
+      command: "pbzip2 -d /var/www/rsn.ucr.ac.cr.bz2"
+
+    - name: Reinicia el servicio de apache2 para aplicar los cambios
+      service:
+        name: apache2
+        state: restarted

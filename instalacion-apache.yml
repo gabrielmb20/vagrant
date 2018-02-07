@@ -25,25 +25,9 @@
     - name: Habilita módulos necesarios rewrite, proxy, proxy_http
       shell: "a2enmod rewrite proxy proxy_http"
         
-    - name: Copia archivo de configuración del virtualhost
-      copy:
-        src: files/01-apache-virtualhost.conf
-        dest: /etc/apache2/sites-available/01-rsn.ucr.ac.cr.conf
-        owner: root
-        group: root
-        mode: 0644
+    - name: Deshabilita virtualhost default
+      shell: "a2dissite 000-default.conf"
 
-    - name: Deshabilita virtualhost default y habilita el nuevo
-      shell: "a2dissite 000-default.conf && a2ensite 01-rsn.ucr.ac.cr.conf"
-
-    - name: Descarga copia del contenido de Joomla
-      get_url:
-        url: http://10.42.30.5/Vagrant/RSN/rsn.ucr.ac.cr.tar.bz2
-        dest: /var/www/rsn.ucr.ac.cr.tar.bz2
-
-    - name: Descomprime contenido de Joomla en /var/www/rsn.ucr.ac.cr/
-      command: "pbzip2 -d /var/www/rsn.ucr.ac.cr.bz2"
-    
     - name: Reiniciar el servicio de apache para aplicar los cambios
       service:
         name: apache2
