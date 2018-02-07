@@ -36,20 +36,20 @@ backend joomla02 {
 	.probe = backend_healthcheck;
 }
 
-backend app01 {
-        .host = "10.20.30.47";
-        .port = "3000";
-        .connect_timeout = 15s;
-        .probe = backend_healthcheck;
-}
-
-
-backend app02 {
-        .host = "10.20.30.48";
-        .port = "3000";
-        .connect_timeout = 15s;
-        .probe = backend_healthcheck;
-}
+#backend app01 {
+#        .host = "10.20.30.47";
+#        .port = "3000";
+#        .connect_timeout = 15s;
+#        .probe = backend_healthcheck;
+#}
+#
+#
+#backend app02 {
+#        .host = "10.20.30.48";
+#        .port = "3000";
+#        .connect_timeout = 15s;
+#        .probe = backend_healthcheck;
+#}
 
 # **********************************************************************************************************************************************
 # **********************************************************************************************************************************************
@@ -59,9 +59,9 @@ sub vcl_init {
     	rsn_joomla_director.add_backend(joomla01);
 	rsn_joomla_director.add_backend(joomla02);
 	
-	new rsn_app_director = directors.round_robin();
-	rsn_app_director.add_backend(app01);
-	rsn_app_director.add_backend(app02);
+#	new rsn_app_director = directors.round_robin();
+#	rsn_app_director.add_backend(app01);
+#	rsn_app_director.add_backend(app02);
 
 } # Fin vcl_init
 
