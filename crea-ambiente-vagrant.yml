@@ -10,4 +10,9 @@
         dest: /home/greencore/vagrant/
         update: yes
 
+    - name: Configuracion de cliente de SSH
+      copy:
+        src: files/config
+        dest: /home/greencore/.ssh/config
+
 

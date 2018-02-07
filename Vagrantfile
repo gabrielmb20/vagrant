@@ -1,7 +1,6 @@
 Vagrant.configure("2") do |config|
 # -----------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------
-
 # -----------------------------------
 # PROXY #1
 # -----------------------------------
@@ -12,6 +11,7 @@ Vagrant.configure("2") do |config|
     proxy01.vm.network "private_network", ip: "10.20.30.41"
 
     proxy01.vm.provision "shell", inline: "sudo apt-get install -y python"
+    proxy01.vm.provision "file", source: "~greencore/.ssh/id_rsa.pub", destination: "~vagrant/.ssh/authorized_keys"
 
     proxy01.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--memory", 1024]
@@ -29,6 +29,7 @@ Vagrant.configure("2") do |config|
     proxy02.vm.network "private_network", ip: "10.20.30.42"
 
     proxy02.vm.provision "shell", inline: "sudo apt-get install -y python"
+    proxy02.vm.provision "file", source: "~greencore/.ssh/id_rsa.pub", destination: "~vagrant/.ssh/authorized_keys"
 
     proxy02.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--memory", 1024]
@@ -45,6 +46,7 @@ Vagrant.configure("2") do |config|
     joomla01.vm.network "private_network", ip: "10.20.30.43"
 
     joomla01.vm.provision "shell", inline: "sudo apt-get install -y python"
+    joomla01.vm.provision "file", source: "~greencore/.ssh/id_rsa.pub", destination: "~vagrant/.ssh/authorized_keys"
 
     joomla01.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--memory", 1024]
@@ -61,6 +63,7 @@ Vagrant.configure("2") do |config|
     joomla02.vm.network "private_network", ip: "10.20.30.44"
 
     joomla02.vm.provision "shell", inline: "sudo apt-get install -y python"
+    joomla02.vm.provision "file", source: "~greencore/.ssh/id_rsa.pub", destination: "~vagrant/.ssh/authorized_keys"
 
     joomla02.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--memory", 1024]
@@ -82,6 +85,7 @@ Vagrant.configure("2") do |config|
     end
 
     mariadb01.vm.provision "shell", inline: "sudo apt-get install -y python"
+    mariadb01.vm.provision "file", source: "~greencore/.ssh/id_rsa.pub", destination: "~vagrant/.ssh/authorized_keys"
 
 #    mariadb01.vm.provision "ansible" do |ansible|
 #      ansible.playbook = "instalacion-mariadb-server.yml"
@@ -100,6 +104,7 @@ Vagrant.configure("2") do |config|
     mariadb02.vm.network "private_network", ip: "10.20.30.46"
 
     mariadb02.vm.provision "shell", inline: "sudo apt-get install -y python"
+    mariadb02.vm.provision "file", source: "~greencore/.ssh/id_rsa.pub", destination: "~vagrant/.ssh/authorized_keys"
 
 #    mariadb02.vm.provision "ansible" do |ansible|
 #      ansible.playbook = "instalacion-mariadb-server.yml"
