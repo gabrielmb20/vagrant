@@ -26,6 +26,9 @@
       copy:
         src: files/my.cnf
         dest: /etc/mysql/my.cnf
+        owner: root
+        group: root
+        mode: 0644
         
     - name: Reiniciar el servicio de mariadb para aplicar los cambios
       service:

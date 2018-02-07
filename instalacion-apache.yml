@@ -8,6 +8,7 @@
         name: "{{ item }}"
         state: present
       with_items:
+        - apache2
         - libapache2-mod-php5 
         - mariadb-common 
         - mariadb-client 
@@ -20,13 +21,13 @@
         - php5-json
         - php5-mcrypt
 
-    - name: Habilita módulos necesarios: rewrite, proxy, proxy_http
+    - name: Habilita módulos necesarios rewrite, proxy, proxy_http
       shell: "a2enmod rewrite proxy proxy_http"
         
     - name: Copia archivo de configuración del virtualhost
       copy:
         src: files/01-apache-virtualhost.conf
-        dest: /etc/apache2/sites/available/01-rsn.ucr.ac.cr.conf
+        dest: /etc/apache2/sites-available/01-rsn.ucr.ac.cr.conf
         owner: root
         group: root
         mode: 0644
