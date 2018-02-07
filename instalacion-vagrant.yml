@@ -1,0 +1,13 @@
+---
+- name: Instala Vagrant sobre Ubuntu
+  hosts: fisicos
+  become: yes
+  tasks:
+    - name: Instala vagrant 2.0.2_x86_64
+      apt:
+        deb: "https://releases.hashicorp.com/vagrant/2.0.2/vagrant_2.0.2_x86_64.deb"
+      register: deb_install
+    
+    - name: Estado de la instalación del agente
+      debug:
+        var: deb_install

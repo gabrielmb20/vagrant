@@ -1,0 +1,10 @@
+---
+- name: Descarga archivos necesarios para crear el ambiente para Vagrant
+  hosts: fisicos
+  tasks:
+    - name: Descarga repositorio de Git
+      git:
+        repo: https://github.com/gabrielmb20/vagrant
+        dest: /home/greencore/vagrant/
+
+
