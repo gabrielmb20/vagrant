@@ -24,6 +24,14 @@
         group: root
         mode: 0644
 
+    - name: Copia configuración predeterminada de varnish
+      copy:
+        src: files/default02.vcl
+        dest: /etc/default/varnish
+        owner: root
+        group: root
+        mode: 0644
+
     - name: Reiniciar el servicio de varnish para aplicar los cambios
       service:
         name: varnish
