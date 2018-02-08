@@ -25,7 +25,13 @@
         name: mariadb
         state: started
       when: inventory_hostname != groups['bases_datos'][0]
-      
+
+    - name: Instala dependencia MySQL-python
+      pip:
+        name: MySQL-python
+        executable: pip2
+        state: latest
+
     - name: Descarga respaldo de la base de datos en el primer nodo
       get_url:
         url: http://10.42.30.5/Vagrant/RSN/respaldo-mysql.sql.bz2

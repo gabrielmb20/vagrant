@@ -17,7 +17,7 @@
       apt:
         update_cache: yes
 
-    - name: Instala el paquete mariadb-server-10.2
+    - name: Instala mariadb-server-10.2
       apt:
         name: mariadb-server-10.2
         state: present
