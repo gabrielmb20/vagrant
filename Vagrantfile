@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
     proxy01.vm.hostname = 'proxy01'
     proxy01.vm.network "private_network", ip: "10.20.30.41"
 
-    proxy01.vm.provision "shell", inline: "sudo apt-get install -y python python-pip"
+    proxy01.vm.provision "shell", inline: "sudo apt-get update; sudo apt-get install -y python python-pip"
     config.vm.provision "shell" do |s|
       ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
       s.inline = <<-SHELL
@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
 
     proxy02.vm.network "private_network", ip: "10.20.30.42"
 
-    proxy02.vm.provision "shell", inline: "sudo apt-get install -y python python-pip"
+    proxy02.vm.provision "shell", inline: "sudo apt-get update; sudo apt-get install -y python python-pip"
     config.vm.provision "shell" do |s|
       ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
       s.inline = <<-SHELL
@@ -56,7 +56,7 @@ Vagrant.configure("2") do |config|
 
     joomla01.vm.network "private_network", ip: "10.20.30.43"
 
-    joomla01.vm.provision "shell", inline: "sudo apt-get install -y python python-pip"
+    joomla01.vm.provision "shell", inline: "sudo apt-get update; sudo apt-get install -y python python-pip"
     config.vm.provision "shell" do |s|
       ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
       s.inline = <<-SHELL
@@ -80,7 +80,7 @@ Vagrant.configure("2") do |config|
 
     joomla02.vm.network "private_network", ip: "10.20.30.44"
 
-    joomla02.vm.provision "shell", inline: "sudo apt-get install -y python python-pip"
+    joomla02.vm.provision "shell", inline: "sudo apt-get update; sudo apt-get install -y python python-pip"
     config.vm.provision "shell" do |s|
       ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
       s.inline = <<-SHELL
@@ -110,7 +110,7 @@ Vagrant.configure("2") do |config|
       v.customize ["modifyvm", :id, "--name", "mariadb01"]
     end
 
-    mariadb01.vm.provision "shell", inline: "sudo apt-get install -y python python-pip"
+    mariadb01.vm.provision "shell", inline: "sudo apt-get update; sudo apt-get install -y python python-pip"
     config.vm.provision "shell" do |s|
       ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
       s.inline = <<-SHELL
@@ -135,7 +135,7 @@ Vagrant.configure("2") do |config|
 
     mariadb02.vm.network "private_network", ip: "10.20.30.46"
 
-    mariadb02.vm.provision "shell", inline: "sudo apt-get install -y python python-pip"
+    mariadb02.vm.provision "shell", inline: "sudo apt-get update; sudo apt-get install -y python python-pip"
     config.vm.provision "shell" do |s|
       ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
       s.inline = <<-SHELL
@@ -165,7 +165,7 @@ Vagrant.configure("2") do |config|
 ###
 ###    app01.vm.network "private_network", ip: "10.20.30.47"
 ###
-###    app01.vm.provision "shell", inline: "sudo apt-get install -y python python-pip"
+###    app01.vm.provision "shell", inline: "sudo apt-get update; sudo apt-get install -y python python-pip"
 ###
 ###    app01.vm.provider :virtualbox do |v|
 ###      v.customize ["modifyvm", :id, "--memory", 1024]
@@ -181,7 +181,7 @@ Vagrant.configure("2") do |config|
 ###
 ###    app02.vm.network "private_network", ip: "10.20.30.48"
 ###
-###    app02.vm.provision "shell", inline: "sudo apt-get install -y python python-pip"
+###    app02.vm.provision "shell", inline: "sudo apt-get update; sudo apt-get install -y python python-pip"
 ###
 ###    app02.vm.provider :virtualbox do |v|
 ###      v.customize ["modifyvm", :id, "--memory", 1024]
