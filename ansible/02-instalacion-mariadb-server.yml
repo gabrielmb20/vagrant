@@ -22,6 +22,14 @@
         name: mariadb-server-10.2
         state: present
 
+    - name: Instala dependencias de MySQL
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - libmysqlclient-dev
+        - python-pip
+
     - name: Agregar configuración principal de MariaDB
       copy:
         src: files/my.cnf
