@@ -16,11 +16,11 @@
 
     - name: Descarga copia del contenido de Joomla
       get_url:
-        url: http://10.42.30.5/Vagrant/RSN/rsn.ucr.ac.cr.tar.bz2
-        dest: /var/www/rsn.ucr.ac.cr.tar.bz2
+        url: http://10.42.30.5/Vagrant/RSN/rsn.ucr.ac.cr.bz2
+        dest: /var/www/rsn.ucr.ac.cr.bz2
  
     - name: Descomprime contenido de Joomla en /var/www/rsn.ucr.ac.cr/
-      command: "pbzip2 -d /var/www/rsn.ucr.ac.cr.bz2"
+      command: "pbzip2 -dc /var/www/rsn.ucr.ac.cr.bz2 | tar xf"
 
     - name: Reinicia el servicio de apache2 para aplicar los cambios
       service:
